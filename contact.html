@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 — 卓汇 JORWIN</title>
+  <meta name="description" content="联系卓汇JORWIN：业务热线、商务邮箱、公司地址。专属顾问一对一对接，为您提供高分子新材料解决方案。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+</head>
+<body>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logo.png" alt="卓汇 JORWIN">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="about.html">关于我们</a></li>
+      <li><a href="business.html">核心业务</a></li>
+      <li><a href="cases.html">合作客户</a></li>
+      <li><a href="team.html">团队</a></li>
+      <li><a href="news.html">新闻</a></li>
+      </ul>
+    <div class="nav-cta" id="navCta">
+      <a href="contact.html" class="btn-nav btn-nav-ghost">联系我们</a>
+      <a href="contact.html" class="btn-nav btn-nav-primary">咨询报价方案</a>
+    </div>
+    <div class="nav-mobile-toggle" id="mobileToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb fade-up">
+      <a href="index.html">首页</a><span class="sep">/</span><span class="current">联系我们</span>
+    </div>
+    <h1 class="page-hero-title fade-up">准备好开启<br><span class="gradient-text">材料创新</span>之旅了吗？</h1>
+    <p class="page-hero-sub fade-up fade-up-delay-1">专属顾问一对一对接，为您量身定制高分子新材料解决方案</p>
+  </div>
+</section>
+
+<section class="content-dark" style="padding-top:60px;">
+  <div class="container">
+    <div class="contact-page-grid fade-up">
+      <!-- 联系表单 -->
+      <div class="contact-form">
+        <h3>发送咨询</h3>
+        <p class="contact-form-sub">填写以下表单，我们的商务经理将尽快与您联系</p>
+        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label>您的姓名 *</label>
+            <input type="text" placeholder="请输入您的姓名" required>
+          </div>
+          <div class="form-group">
+            <label>公司名称 *</label>
+            <input type="text" placeholder="请输入您的公司名称" required>
+          </div>
+          <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div>
+              <label>联系电话 *</label>
+              <input type="tel" placeholder="手机号" required>
+            </div>
+            <div>
+              <label>电子邮箱</label>
+              <input type="email" placeholder="you@company.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>需求类型</label>
+            <select>
+              <option>ABS 树脂原料采购</option>
+              <option>SAN 树脂原料采购</option>
+              <option>新材料解决方案咨询</option>
+              <option>技术合作/配方优化</option>
+              <option>其他需求</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>需求描述</label>
+            <textarea placeholder="请简要描述您的材料需求、数量、应用场景等信息，以便我们为您提供精准的方案建议…" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">发送咨询请求 →</button>
+        </form>
+      </div>
+
+      <!-- 联系信息区域 -->
+      <div class="contact-info-cards">
+        <!-- Promo 描述区块 -->
+        <div class="contact-promo-box">
+          <span class="contact-promo-badge">专属服务</span>
+          <h3>获取专属<br><span class="gradient-text">材料报价方案</span></h3>
+          <p class="contact-promo-desc">填写左侧需求表单，专属顾问将为您提供一对一材料方案与精准报价</p>
+          <div class="contact-promo-divider"></div>
+          <div class="contact-promo-highlights">
+            <span>✓ 精准报价</span>
+            <span>✓ 专属顾问</span>
+            <span>✓ 方案定制</span>
+          </div>
+        </div>
+
+        <!-- 联系信息卡片组 -->
+        <div class="contact-info-group">
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon">📞</div>
+            <div class="contact-info-card-body">
+              <h4>业务热线</h4>
+              <p>13066169807</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon">✉️</div>
+            <div class="contact-info-card-body">
+              <h4>商务邮箱</h4>
+              <p>brain.lin@jorwin.com</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon">🏢</div>
+            <div class="contact-info-card-body">
+              <h4>办公地址</h4>
+              <p>广东省东莞市寮步镇光达制造智慧谷 A区3栋203</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon">🏭</div>
+            <div class="contact-info-card-body">
+              <h4>工厂地址</h4>
+              <p>广东省东莞市寮步镇塘唇金富西路13号1栋</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+          <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="assets/images/logo.png" alt="卓汇 JORWIN">
+          <span class="footer-logo-text">JORWIN 卓汇</span>
+        </div>
+        <p class="footer-tagline">以新材料，铸大国制造。深耕 ABS/SAN 高分子新材料领域二十余年。</p>
+        </div>
+      <div class="footer-col">
+        <div class="footer-col-title">产品服务</div>
+        <div class="footer-links">
+          <a href="business.html">ABS 树脂代理</a>
+          <a href="business.html">SAN 树脂代理</a>
+          <a href="business.html">新材料解决方案</a>
+          </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">快速导航</div>
+        <div class="footer-links">
+          <a href="about.html">公司简介</a>
+          <a href="team.html">团队介绍</a>
+          <a href="news.html">新闻动态</a>
+          <a href="cases.html">合作客户</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">联系我们</div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📞</span>
+          <div class="footer-contact-text"><strong>业务热线</strong>13066169807</div>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">✉️</span>
+          <div class="footer-contact-text"><strong>商务邮箱</strong>brain.lin@jorwin.com</div>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📍</span>
+          <div class="footer-contact-text"><strong>公司地址</strong>广东省东莞市寮步镇光达制造智慧谷 A区3栋203</div>
+        </div>
+      </div>
+      <div class="footer-qr-col">
+        <div class="footer-col-title">添加企业微信</div>
+        <div class="footer-qr-img">
+          <img src="assets/images/qr-wechat-real.png" alt="微信二维码">
+        </div>
+      </div>
+        </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">© 2026 卓汇鑫盛（广东）电子科技有限公司 · JorwinXinsheng (Guangdong) Electronics Technology Co., Ltd.</div>
+      <div class="footer-legal">
+        <span class="footer-legal-item">隐私保护声明</span><span class="footer-legal-item">服务条款</span><span class="footer-legal-item">粤ICP备2024XXXXXX号</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 提交成功弹窗 -->
+<div id="submitModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:#1E1B4B;border:1px solid rgba(124,58,237,0.4);border-radius:24px;padding:48px 40px;max-width:480px;width:90%;text-align:center;position:relative;">
+    <div style="font-size:48px;margin-bottom:16px;">✅</div>
+    <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#fff;margin-bottom:12px;">咨询已提交！</h3>
+    <p style="font-size:15px;color:rgba(196,181,253,0.8);line-height:1.7;margin-bottom:28px;">感谢您的咨询，我们的专属商务顾问将尽快与您联系。<br>如需加急，可直接通过以下方式联系我们：</p>
+    <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:14px;padding:20px;margin-bottom:24px;">
+      <div style="font-size:14px;color:#C4B5FD;margin-bottom:8px;">📞 <strong style="color:#fff;">业务热线</strong> &nbsp; 13066169807</div>
+      <div style="font-size:14px;color:#C4B5FD;">✉️ <strong style="color:#fff;">商务邮箱</strong> &nbsp; brain.lin@jorwin.com</div>
+    </div>
+    <button onclick="document.getElementById('submitModal').style.display='none'" style="background:linear-gradient(135deg,#7C3AED,#6366F1);color:#fff;border:none;border-radius:9999px;padding:12px 36px;font-size:15px;font-weight:700;cursor:pointer;">好的，知道了</button>
+  </div>
+</div>
+
+<script>
+function handleContactSubmit(e) {
+  e.preventDefault();
+  var modal = document.getElementById('submitModal');
+  modal.style.display = 'flex';
+  e.target.reset();
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>
