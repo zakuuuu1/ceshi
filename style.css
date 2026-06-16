@@ -1558,24 +1558,26 @@ ul, ol {
   100% { transform: translateX(-50%); }
 }
 
-/* Brand Card — 无卡片容器，纯文本+Logo 排列 */
+/* Brand Card */
 .brand-card {
-  width: 240px;
+  width: 200px;
   flex-shrink: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
+  background: #fff;
+  border: 1px solid #EDE9FE;
+  border-radius: 24px;
+  padding: 32px 24px;
   text-align: center;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 0;
 }
 
 .brand-card:hover {
-  transform: none;
-  box-shadow: none;
+  border-color: #7C3AED;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.1);
+  transform: translateY(-4px);
 }
 
 .brand-logo-img {
