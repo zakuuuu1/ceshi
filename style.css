@@ -445,6 +445,8 @@ ul, ol {
   overflow: hidden;
   position: relative;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 58, 237, 0.3);
+  /* ⬇ 图片加载失败时的纯CSS降级背景 */
+  background: linear-gradient(135deg, #1E1B4B 0%, #312E81 40%, #5B21B6 75%, #7C3AED 100%);
 }
 
 .hero-img-frame img {
@@ -452,6 +454,9 @@ ul, ol {
   height: 420px;
   object-fit: cover;
   object-position: center;
+  /* 图片覆盖在降级背景之上 */
+  position: relative;
+  z-index: 1;
 }
 
 .hero-img-overlay {
@@ -1682,6 +1687,12 @@ ul, ol {
   margin-top: 2px;
 }
 
+.footer-icon-svg {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
 .footer-contact-text {
   font-size: 14px;
   color: var(--text-muted);
@@ -1913,6 +1924,46 @@ a.footer-legal-item:hover {
 .explore-icon.ei-team     { background: linear-gradient(135deg, #06B6D4, #0891B2); }
 .explore-icon.ei-news     { background: linear-gradient(135deg, #F59E0B, #D97706); }
 .explore-icon.ei-contact  { background: linear-gradient(135deg, #10B981, #059669); }
+
+/* ── Explore icon SVG override ── */
+.explore-icon svg {
+  color: #fff;
+}
+
+/* ── Resource card icons (business.html) ── */
+.res-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 14px;
+  color: var(--purple);
+}
+
+/* ── Culture icons (team.html) ── */
+.culture-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--purple-light);
+}
+
+/* ── Check items (contact.html) ── */
+.check-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Modal success icon (contact.html) ── */
+.modal-success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #10B981;
+}
 
 .explore-card-title {
   font-family: var(--font-head);
