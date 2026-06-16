@@ -2163,244 +2163,230 @@ a.footer-legal-item:hover {
   background: rgba(255, 255, 255, 0.12) !important;
 }
 
-/* ── 发展历程 — 横向编号步进器 ── */
-.timeline-stepper {
-  padding: 20px 0 0;
+/* ── 发展历程 — 纵向交替时间轴 ── */
+.timeline-alt {
+  padding: 10px 0 0;
 }
 
-.ts-track {
+.ta-track {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-/* 横向连接线 — 位于节点后方 */
-.ts-track::before {
+/* 中央竖线 */
+.ta-track::before {
   content: '';
   position: absolute;
-  left: calc(10% + 40px);
-  right: calc(10% + 40px);
-  top: 44px;
-  height: 2px;
-  background: linear-gradient(90deg,
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom,
     #7C3AED 0%,
-    #6366F1 33%,
-    #D97706 66%,
+    #6366F1 30%,
+    #D97706 60%,
     #8B5CF6 100%
   );
+  transform: translateX(-50%);
   border-radius: 1px;
-  opacity: 0.5;
+  opacity: 0.4;
   z-index: 0;
 }
 
-/* 每个步进节点 */
-.ts-step {
-  position: relative;
+/* 每一行 */
+.ta-row {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  flex: 0 0 auto;
-  width: 220px;
+  position: relative;
   z-index: 1;
+  padding: 18px 0;
 }
 
-/* 节点包裹 — 确保连接线从节点中心穿过 */
-.ts-node-wrap {
+/* 三栏布局：卡片 | 节点 | 空白（或反向） */
+.ta-row > * {
+  flex-shrink: 0;
+}
+
+.ta-spacer {
+  width: 50%;
+}
+
+/* 节点列 */
+.ta-node-col {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 0;
+  justify-content: center;
   position: relative;
   z-index: 2;
-  margin-bottom: 32px;
 }
 
-/* 编号圆形节点 */
-.ts-node {
-  width: 88px;
-  height: 88px;
+/* 横向连接线 */
+.ta-line-h {
+  width: 40px;
+  height: 1px;
+  background: rgba(124, 58, 237, 0.3);
+  flex-shrink: 0;
+}
+
+.ta-row:nth-child(2) .ta-line-h { background: rgba(99, 102, 241, 0.3); }
+.ta-row:nth-child(3) .ta-line-h { background: rgba(217, 119, 6, 0.3); }
+.ta-row:nth-child(4) .ta-line-h { background: rgba(139, 92, 246, 0.3); }
+
+/* 年份圆形节点 */
+.ta-node {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1E1B4B 0%, #161330 100%);
-  border: 3px solid rgba(124, 58, 237, 0.25);
+  background: linear-gradient(135deg, #1E1B4B, #161330);
+  border: 2.5px solid rgba(124, 58, 237, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 10px rgba(124, 58, 237, 0.06);
+  box-shadow: 0 0 0 8px rgba(124, 58, 237, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
 }
 
-.ts-step:nth-child(2) .ts-node {
-  border-color: rgba(99, 102, 241, 0.25);
-  box-shadow: 0 0 0 10px rgba(99, 102, 241, 0.06);
+.ta-row:nth-child(2) .ta-node {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.06);
 }
-.ts-step:nth-child(3) .ts-node {
-  border-color: rgba(217, 119, 6, 0.25);
-  box-shadow: 0 0 0 10px rgba(217, 119, 6, 0.06);
+.ta-row:nth-child(3) .ta-node {
+  border-color: rgba(217, 119, 6, 0.5);
+  box-shadow: 0 0 0 8px rgba(217, 119, 6, 0.06);
 }
-.ts-step:nth-child(4) .ts-node {
-  border-color: rgba(139, 92, 246, 0.25);
-  box-shadow: 0 0 0 10px rgba(139, 92, 246, 0.06);
+.ta-row:nth-child(4) .ta-node {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 8px rgba(139, 92, 246, 0.06);
 }
 
-/* 编号数字 */
-.ts-num {
+/* 年份数字 */
+.ta-year {
   font-family: var(--font-head);
-  font-size: 32px;
+  font-size: 14px;
   font-weight: 800;
-  background: linear-gradient(135deg, #A78BFA, #7C3AED);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -1px;
+  color: #fff;
+  letter-spacing: 0.5px;
 }
 
-.ts-step:nth-child(2) .ts-num {
-  background: linear-gradient(135deg, #A5B4FC, #6366F1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ts-step:nth-child(3) .ts-num {
-  background: linear-gradient(135deg, #FCD34D, #D97706);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ts-step:nth-child(4) .ts-num {
-  background: linear-gradient(135deg, #C4B5FD, #8B5CF6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* 节点 Hover */
-.ts-step:hover .ts-node {
-  transform: scale(1.08);
-  border-color: #7C3AED;
-  box-shadow: 0 0 0 14px rgba(124, 58, 237, 0.15), 0 0 40px rgba(124, 58, 237, 0.25);
-}
-
-.ts-step:nth-child(2):hover .ts-node {
-  border-color: #6366F1;
-  box-shadow: 0 0 0 14px rgba(99, 102, 241, 0.15), 0 0 40px rgba(99, 102, 241, 0.25);
-}
-.ts-step:nth-child(3):hover .ts-node {
-  border-color: #D97706;
-  box-shadow: 0 0 0 14px rgba(217, 119, 6, 0.15), 0 0 40px rgba(217, 119, 6, 0.2);
-}
-.ts-step:nth-child(4):hover .ts-node {
-  border-color: #8B5CF6;
-  box-shadow: 0 0 0 14px rgba(139, 92, 246, 0.15), 0 0 40px rgba(139, 92, 246, 0.25);
-}
-
-/* 下方卡片 */
-.ts-card {
-  width: 100%;
+/* 卡片 — 50% 宽度 */
+.ta-card {
+  width: calc(50% - 70px);
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
-  border-radius: 16px;
-  padding: 24px 20px;
-  text-align: center;
+  border-radius: 14px;
+  padding: 24px 22px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ts-card:hover {
-  border-color: rgba(124, 58, 237, 0.35);
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+/* 左侧卡片的特色处理 */
+.ta-left {
+  text-align: right;
+  margin-right: 0;
 }
 
-.ts-step:nth-child(2) .ts-card:hover { border-color: rgba(99, 102, 241, 0.35); }
-.ts-step:nth-child(3) .ts-card:hover { border-color: rgba(217, 119, 6, 0.35); }
-.ts-step:nth-child(4) .ts-card:hover { border-color: rgba(139, 92, 246, 0.35); }
+/* 右侧卡片 */
+.ta-right {
+  margin-left: 0;
+}
 
-.ts-card-title {
+.ta-card:hover {
+  border-color: rgba(124, 58, 237, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+.ta-row:nth-child(2) .ta-card:hover { border-color: rgba(99, 102, 241, 0.35); }
+.ta-row:nth-child(3) .ta-card:hover { border-color: rgba(217, 119, 6, 0.35); }
+.ta-row:nth-child(4) .ta-card:hover { border-color: rgba(139, 92, 246, 0.35); }
+
+/* 节点 Hover */
+.ta-row:hover .ta-node {
+  transform: scale(1.12);
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 12px rgba(124, 58, 237, 0.15), 0 0 30px rgba(124, 58, 237, 0.25);
+}
+
+.ta-row:nth-child(2):hover .ta-node {
+  border-color: #6366F1;
+  box-shadow: 0 0 0 12px rgba(99, 102, 241, 0.15), 0 0 30px rgba(99, 102, 241, 0.25);
+}
+.ta-row:nth-child(3):hover .ta-node {
+  border-color: #D97706;
+  box-shadow: 0 0 0 12px rgba(217, 119, 6, 0.15), 0 0 30px rgba(217, 119, 6, 0.18);
+}
+.ta-row:nth-child(4):hover .ta-node {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 12px rgba(139, 92, 246, 0.15), 0 0 30px rgba(139, 92, 246, 0.25);
+}
+
+.ta-title {
   font-family: var(--font-head);
   font-size: 20px;
   font-weight: 700;
   color: var(--text-white);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-.ts-card-year {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  color: #A78BFA;
-  background: rgba(124, 58, 237, 0.12);
-  padding: 2px 12px;
-  border-radius: 9999px;
-  margin-bottom: 12px;
-  letter-spacing: 0.5px;
-}
-
-.ts-step:nth-child(2) .ts-card-year { color: #A5B4FC; background: rgba(99, 102, 241, 0.12); }
-.ts-step:nth-child(3) .ts-card-year { color: #FCD34D; background: rgba(217, 119, 6, 0.12); }
-.ts-step:nth-child(4) .ts-card-year { color: #C4B5FD; background: rgba(139, 92, 246, 0.12); }
-
-.ts-card-desc {
+.ta-desc {
   font-size: 13px;
   line-height: 1.65;
   color: rgba(196, 181, 253, 0.55);
   margin: 0;
 }
 
-/* 响应式：≤768px 切换为纵向 */
+/* 响应式：≤768px 全部右对齐 */
 @media (max-width: 768px) {
-  .ts-track {
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 60px;
-    gap: 0;
+  .ta-track::before {
+    left: 30px;
+    transform: none;
   }
 
-  .ts-track::before {
-    left: 44px;
-    right: auto;
-    top: 20px;
-    bottom: 20px;
-    width: 2px;
-    height: auto;
-    background: linear-gradient(to bottom, #7C3AED, #6366F1, #D97706, #8B5CF6);
+  .ta-row {
+    padding: 12px 0 12px 60px;
   }
 
-  .ts-step {
-    flex-direction: row;
+  .ta-spacer {
+    display: none;
+  }
+
+  .ta-card {
     width: 100%;
-    gap: 20px;
-    margin-bottom: 36px;
-    align-items: flex-start;
+    text-align: left !important;
   }
 
-  .ts-step:last-child {
-    margin-bottom: 0;
+  .ta-node-col {
+    position: absolute;
+    left: 0;
+    width: 60px;
+    justify-content: center;
   }
 
-  .ts-node-wrap {
-    margin-bottom: 0;
-    flex-shrink: 0;
+  .ta-line-h {
+    width: 24px;
   }
 
-  .ts-node {
-    width: 56px;
-    height: 56px;
-    box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.06);
+  .ta-node {
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.06);
   }
 
-  .ts-num {
-    font-size: 22px;
+  .ta-year {
+    font-size: 12px;
   }
 
-  .ts-card {
-    flex: 1;
-    text-align: left;
-    padding: 18px 16px;
-  }
-
-  .ts-card-title {
+  .ta-title {
     font-size: 17px;
   }
 
-  .ts-card-desc {
+  .ta-desc {
     font-size: 12px;
   }
 }
