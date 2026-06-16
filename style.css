@@ -2163,237 +2163,245 @@ a.footer-legal-item:hover {
   background: rgba(255, 255, 255, 0.12) !important;
 }
 
-/* ── 发展历程 — 垂直单侧旗舰时间轴 ── */
-.timeline-flagship {
+/* ── 发展历程 — 横向编号步进器 ── */
+.timeline-stepper {
   padding: 20px 0 0;
 }
 
-.tf-track {
+.ts-track {
   position: relative;
-  max-width: 860px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
   margin: 0 auto;
-  padding-left: 104px;
+  padding: 0 20px;
 }
 
-/* 左侧渐变时间轴线 */
-.tf-track::before {
+/* 横向连接线 — 位于节点后方 */
+.ts-track::before {
   content: '';
   position: absolute;
-  left: 44px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom,
-    rgba(124, 58, 237, 0.08) 0%,
-    #7C3AED 10%,
-    #6366F1 38%,
-    #D97706 65%,
-    #8B5CF6 90%,
-    rgba(139, 92, 246, 0.08) 100%
+  left: calc(10% + 40px);
+  right: calc(10% + 40px);
+  top: 44px;
+  height: 2px;
+  background: linear-gradient(90deg,
+    #7C3AED 0%,
+    #6366F1 33%,
+    #D97706 66%,
+    #8B5CF6 100%
   );
-  border-radius: 2px;
+  border-radius: 1px;
+  opacity: 0.5;
+  z-index: 0;
 }
 
-/* 每个里程碑项 */
-.tf-item {
+/* 每个步进节点 */
+.ts-step {
   position: relative;
-  margin-bottom: 44px;
   display: flex;
-  align-items: flex-start;
-  gap: 0;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 220px;
+  z-index: 1;
 }
 
-.tf-item:last-child {
-  margin-bottom: 0;
-}
-
-/* 年份节点容器 */
-.tf-node {
-  position: absolute;
-  left: -104px;
-  top: 6px;
-  width: 44px;
-  display: flex;
-  justify-content: center;
+/* 节点包裹 — 确保连接线从节点中心穿过 */
+.ts-node-wrap {
+  position: relative;
   z-index: 2;
+  margin-bottom: 32px;
 }
 
-/* 年份圆形 */
-.tf-node-inner {
-  width: 64px;
-  height: 64px;
+/* 编号圆形节点 */
+.ts-node {
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
-  background: #161330;
-  border: 3px solid rgba(124, 58, 237, 0.4);
+  background: linear-gradient(135deg, #1E1B4B 0%, #161330 100%);
+  border: 3px solid rgba(124, 58, 237, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 8px rgba(124, 58, 237, 0.06), inset 0 0 20px rgba(124, 58, 237, 0.08);
+  box-shadow: 0 0 0 10px rgba(124, 58, 237, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tf-item:nth-child(2) .tf-node-inner {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.06), inset 0 0 20px rgba(99, 102, 241, 0.08);
+.ts-step:nth-child(2) .ts-node {
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 0 10px rgba(99, 102, 241, 0.06);
 }
-.tf-item:nth-child(3) .tf-node-inner {
-  border-color: rgba(217, 119, 6, 0.4);
-  box-shadow: 0 0 0 8px rgba(217, 119, 6, 0.06), inset 0 0 20px rgba(217, 119, 6, 0.08);
+.ts-step:nth-child(3) .ts-node {
+  border-color: rgba(217, 119, 6, 0.25);
+  box-shadow: 0 0 0 10px rgba(217, 119, 6, 0.06);
 }
-.tf-item:nth-child(4) .tf-node-inner {
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 0 0 8px rgba(139, 92, 246, 0.06), inset 0 0 20px rgba(139, 92, 246, 0.08);
-}
-
-/* Hover 发光 */
-.tf-item:hover .tf-node-inner {
-  transform: scale(1.12);
-  border-color: #7C3AED;
-  box-shadow: 0 0 0 14px rgba(124, 58, 237, 0.15), 0 0 36px rgba(124, 58, 237, 0.3);
+.ts-step:nth-child(4) .ts-node {
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 0 10px rgba(139, 92, 246, 0.06);
 }
 
-.tf-item:nth-child(2):hover .tf-node-inner {
-  border-color: #6366F1;
-  box-shadow: 0 0 0 14px rgba(99, 102, 241, 0.15), 0 0 36px rgba(99, 102, 241, 0.3);
-}
-.tf-item:nth-child(3):hover .tf-node-inner {
-  border-color: #D97706;
-  box-shadow: 0 0 0 14px rgba(217, 119, 6, 0.15), 0 0 36px rgba(217, 119, 6, 0.24);
-}
-.tf-item:nth-child(4):hover .tf-node-inner {
-  border-color: #8B5CF6;
-  box-shadow: 0 0 0 14px rgba(139, 92, 246, 0.15), 0 0 36px rgba(139, 92, 246, 0.3);
-}
-
-.tf-year-num {
+/* 编号数字 */
+.ts-num {
   font-family: var(--font-head);
-  font-size: 15px;
+  font-size: 32px;
   font-weight: 800;
-  color: #fff;
-  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #A78BFA, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
 }
 
-/* 旗舰卡片 */
-.tf-card {
-  flex: 1;
+.ts-step:nth-child(2) .ts-num {
+  background: linear-gradient(135deg, #A5B4FC, #6366F1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ts-step:nth-child(3) .ts-num {
+  background: linear-gradient(135deg, #FCD34D, #D97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ts-step:nth-child(4) .ts-num {
+  background: linear-gradient(135deg, #C4B5FD, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 节点 Hover */
+.ts-step:hover .ts-node {
+  transform: scale(1.08);
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 14px rgba(124, 58, 237, 0.15), 0 0 40px rgba(124, 58, 237, 0.25);
+}
+
+.ts-step:nth-child(2):hover .ts-node {
+  border-color: #6366F1;
+  box-shadow: 0 0 0 14px rgba(99, 102, 241, 0.15), 0 0 40px rgba(99, 102, 241, 0.25);
+}
+.ts-step:nth-child(3):hover .ts-node {
+  border-color: #D97706;
+  box-shadow: 0 0 0 14px rgba(217, 119, 6, 0.15), 0 0 40px rgba(217, 119, 6, 0.2);
+}
+.ts-step:nth-child(4):hover .ts-node {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 14px rgba(139, 92, 246, 0.15), 0 0 40px rgba(139, 92, 246, 0.25);
+}
+
+/* 下方卡片 */
+.ts-card {
+  width: 100%;
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
   border-radius: 16px;
-  overflow: hidden;
+  padding: 24px 20px;
+  text-align: center;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
 }
 
-.tf-card:hover {
+.ts-card:hover {
   border-color: rgba(124, 58, 237, 0.35);
-  transform: translateX(8px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* 左侧颜色装饰条 */
-.tf-card-accent {
-  position: absolute;
-  left: 0;
-  top: 12px;
-  bottom: 12px;
-  width: 4px;
-  border-radius: 4px;
-}
+.ts-step:nth-child(2) .ts-card:hover { border-color: rgba(99, 102, 241, 0.35); }
+.ts-step:nth-child(3) .ts-card:hover { border-color: rgba(217, 119, 6, 0.35); }
+.ts-step:nth-child(4) .ts-card:hover { border-color: rgba(139, 92, 246, 0.35); }
 
-.tf-accent-purple  { background: linear-gradient(to bottom, #7C3AED, #9F67F5); }
-.tf-accent-indigo  { background: linear-gradient(to bottom, #6366F1, #818CF8); }
-.tf-accent-amber   { background: linear-gradient(to bottom, #D97706, #F59E0B); }
-.tf-accent-violet  { background: linear-gradient(to bottom, #8B5CF6, #A78BFA); }
-
-/* 卡片内容 */
-.tf-card-body {
-  padding: 28px 32px 28px 36px;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.tf-card-icon {
-  font-size: 40px;
-  flex-shrink: 0;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(124, 58, 237, 0.08);
-  border-radius: 14px;
-  transition: all 0.35s ease;
-}
-
-.tf-item:hover .tf-card-icon {
-  background: rgba(124, 58, 237, 0.15);
-  transform: scale(1.08);
-}
-
-.tf-item:nth-child(2) .tf-card-icon      { background: rgba(99, 102, 241, 0.08); }
-.tf-item:nth-child(2):hover .tf-card-icon { background: rgba(99, 102, 241, 0.15); }
-.tf-item:nth-child(3) .tf-card-icon      { background: rgba(217, 119, 6, 0.08); }
-.tf-item:nth-child(3):hover .tf-card-icon { background: rgba(217, 119, 6, 0.15); }
-.tf-item:nth-child(4) .tf-card-icon      { background: rgba(139, 92, 246, 0.08); }
-.tf-item:nth-child(4):hover .tf-card-icon { background: rgba(139, 92, 246, 0.15); }
-
-.tf-card-title {
+.ts-card-title {
   font-family: var(--font-head);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text-white);
-  margin-bottom: 6px;
-  line-height: 1.3;
+  margin-bottom: 4px;
 }
 
-.tf-card-desc {
-  font-size: 14px;
-  line-height: 1.7;
-  color: rgba(196, 181, 253, 0.6);
+.ts-card-year {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #A78BFA;
+  background: rgba(124, 58, 237, 0.12);
+  padding: 2px 12px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.ts-step:nth-child(2) .ts-card-year { color: #A5B4FC; background: rgba(99, 102, 241, 0.12); }
+.ts-step:nth-child(3) .ts-card-year { color: #FCD34D; background: rgba(217, 119, 6, 0.12); }
+.ts-step:nth-child(4) .ts-card-year { color: #C4B5FD; background: rgba(139, 92, 246, 0.12); }
+
+.ts-card-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(196, 181, 253, 0.55);
   margin: 0;
 }
 
-/* 响应式：小屏适配 */
+/* 响应式：≤768px 切换为纵向 */
 @media (max-width: 768px) {
-  .tf-track {
-    padding-left: 64px;
-  }
-  .tf-track::before {
-    left: 28px;
-  }
-  .tf-node {
-    left: -64px;
-    width: 28px;
-  }
-  .tf-node-inner {
-    width: 48px;
-    height: 48px;
-    border-width: 2px;
-  }
-  .tf-year-num {
-    font-size: 12px;
-  }
-  .tf-item {
-    margin-bottom: 32px;
-  }
-  .tf-card-body {
-    padding: 20px 20px 20px 28px;
+  .ts-track {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    padding-left: 60px;
+    gap: 0;
   }
-  .tf-card-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 30px;
-    border-radius: 12px;
+
+  .ts-track::before {
+    left: 44px;
+    right: auto;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(to bottom, #7C3AED, #6366F1, #D97706, #8B5CF6);
   }
-  .tf-card-title {
-    font-size: 18px;
+
+  .ts-step {
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 36px;
+    align-items: flex-start;
   }
-  .tf-card-desc {
-    font-size: 13px;
+
+  .ts-step:last-child {
+    margin-bottom: 0;
+  }
+
+  .ts-node-wrap {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .ts-node {
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.06);
+  }
+
+  .ts-num {
+    font-size: 22px;
+  }
+
+  .ts-card {
+    flex: 1;
+    text-align: left;
+    padding: 18px 16px;
+  }
+
+  .ts-card-title {
+    font-size: 17px;
+  }
+
+  .ts-card-desc {
+    font-size: 12px;
   }
 }
 .fade-up {
