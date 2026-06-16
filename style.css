@@ -1132,23 +1132,18 @@ ul, ol {
   border-color: var(--purple);
 }
 
-.team-avatar {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-head);
-  font-size: 32px;
-  font-weight: 800;
-  color: #fff;
+/* team capability cards (v2: department-based, no fake persons) */
+.team-capability-card {
+  border-left: 4px solid var(--purple);
 }
-
-.avatar-1 { background: linear-gradient(135deg, #7C3AED, #5B21B6); }
-.avatar-2 { background: linear-gradient(135deg, #6366F1, #4338CA); }
-.avatar-3 { background: linear-gradient(135deg, #D97706, #92400E); }
+.team-capability-card .team-name {
+  color: var(--text-dark);
+}
+.team-capability-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+}
 
 .team-name {
   font-family: var(--font-head);
