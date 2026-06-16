@@ -808,16 +808,14 @@ ul, ol {
 }
 
 .biz-icon {
-  width: 120px;
-  height: 120px;
-  border-radius: 16px;
+  width: calc(100% + 80px);
+  height: 200px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   overflow: hidden;
-  margin-bottom: 28px;
-  background: rgba(124, 58, 237, 0.06);
-  border: 1px solid rgba(71, 64, 122, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: -40px 0 28px -40px;
+  background: transparent;
+  border: none;
+  display: block;
 }
 
 .biz-img {
