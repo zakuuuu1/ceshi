@@ -1716,6 +1716,60 @@ ul, ol {
 .footer-legal-item {
   font-size: 13px;
   color: rgba(124, 114, 159, 0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a.footer-legal-item:hover {
+  color: var(--purple);
+}
+
+/* ── 法律声明页面内容样式 ── */
+.legal-content {
+  padding: 20px 0 60px;
+}
+.legal-update {
+  font-size: 14px;
+  color: var(--text-gray);
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--light-border);
+}
+.legal-content h2 {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+.legal-content h2:first-of-type {
+  margin-top: 0;
+}
+.legal-content p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-gray);
+  margin-bottom: 16px;
+}
+.legal-content ul {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.legal-content li {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-gray);
+  margin-bottom: 8px;
+}
+.legal-contact {
+  list-style: none;
+  padding-left: 0 !important;
+}
+.legal-contact li {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-gray);
+  margin-bottom: 4px;
 }
 
 /* ── Nav Active 状态（多页面）── */
