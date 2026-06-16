@@ -2221,7 +2221,7 @@ a.footer-legal-item:hover {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  width: 0;
+  width: 130px;
   justify-content: center;
   position: relative;
   z-index: 2;
@@ -2229,7 +2229,7 @@ a.footer-legal-item:hover {
 
 /* 横向连接线 */
 .ta-line-h {
-  width: 40px;
+  width: 30px;
   height: 1px;
   background: rgba(124, 58, 237, 0.3);
   flex-shrink: 0;
@@ -2276,9 +2276,9 @@ a.footer-legal-item:hover {
   letter-spacing: 0.5px;
 }
 
-/* 卡片 — 50% 宽度 */
+/* 卡片 — 50% 宽度减去节点列一半 */
 .ta-card {
-  width: calc(50% - 70px);
+  width: calc(50% - 85px);
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
   border-radius: 14px;
@@ -2289,12 +2289,12 @@ a.footer-legal-item:hover {
 /* 左侧卡片的特色处理 */
 .ta-left {
   text-align: right;
-  margin-right: 0;
+  margin-right: 10px;
 }
 
 /* 右侧卡片 */
 .ta-right {
-  margin-left: 0;
+  margin-left: 10px;
 }
 
 .ta-card:hover {
