@@ -2207,12 +2207,13 @@ a.footer-legal-item:hover {
 }
 
 /* 三栏布局：卡片 | 节点 | 空白（或反向） */
-.ta-row > * {
+.ta-row > :not(.ta-spacer) {
   flex-shrink: 0;
 }
 
 .ta-spacer {
-  width: 50%;
+  flex: 1;
+  min-width: 0;
 }
 
 /* 节点列 */
