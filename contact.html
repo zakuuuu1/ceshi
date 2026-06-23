@@ -222,27 +222,11 @@
 
 <script>
 /* ============================================================
- * 飞书多维表格 接入配置区域
- * 老板拿到 API 信息后，在下方填入对应值即可
- * ============================================================ */
-
-// ★ 第1处：填入飞书个人访问令牌（Personal Access Token）
-//   获取方式：飞书开放平台 → 我的凭证 → 复制"个人访问令牌"
-//   格式类似：u-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-var FEISHU_TOKEN = "请填入你的飞书个人访问令牌";
-
-// ★ 第2处：填入多维表格的 App Token（表格ID）
-//   获取方式：打开飞书多维表格 → 地址栏 URL 中 /base/ 后面那串字符
-//   格式类似：bascnxxxxxxxxxxxxxxxxxx
-var FEISHU_APP_TOKEN = "请填入多维表格的App Token";
-
-// ★ 第3处：填入多维表格的数据表 ID（Table ID）
-//   获取方式：多维表格 → 右键点击底部 Sheet 标签 → 复制链接 → 取 tableId= 后面的字符
-//   格式类似：tblxxxxxxxxxxxxxxxxxx
-var FEISHU_TABLE_ID = "请填入数据表Table ID";
-
-/* ============================================================
- * 以下代码无需修改
+ * Supabase 后端接入（通过 Vercel Serverless Function 中转）
+ * 凭证配置：Vercel 控制台 → Settings → Environment Variables
+ *   SUPABASE_URL      = https://xxxxxxxxxxxx.supabase.co
+ *   SUPABASE_ANON_KEY = eyJhbGciOi...（anon public key）
+ * 无需在此文件填写任何 key，前端代码完全干净安全。
  * ============================================================ */
 
 async function handleContactSubmit(e) {
@@ -251,12 +235,12 @@ async function handleContactSubmit(e) {
   // 读取表单数据
   var form = e.target;
   var inputs = form.querySelectorAll('input, select, textarea');
-  var name    = inputs[0].value.trim();
-  var company = inputs[1].value.trim();
-  var phone   = inputs[2].value.trim();
-  var email   = inputs[3].value.trim();
-  var type    = inputs[4].value;
-  var desc    = inputs[5].value.trim();
+  var name             = inputs[0].value.trim();
+  var company          = inputs[1].value.trim();
+  var phone            = inputs[2].value.trim();
+  var email            = inputs[3].value.trim();
+  var requirement_type = inputs[4].value;
+  var description      = inputs[5].value.trim();
 
   // 提交按钮加载状态
   var btn = form.querySelector('button[type="submit"]');
@@ -264,51 +248,26 @@ async function handleContactSubmit(e) {
   btn.textContent = '提交中…';
   btn.disabled = true;
 
-  // 构建飞书多维表格写入数据
-  // ★ 第4处：如果多维表格的字段名称不同，请修改下方引号内的字段名
-  //   例如把 "姓名" 改成你在飞书表格里实际设置的列标题
-  var fields = {
-    "姓名":     name,
-    "公司名称": company,
-    "联系电话": phone,
-    "电子邮箱": email,
-    "需求类型": type,
-    "需求描述": desc,
-    "提交时间": new Date().toLocaleString('zh-CN')
-  };
-
   try {
-    var response = await fetch(
-      'https://open.feishu.cn/open-apis/bitable/v1/apps/' + FEISHU_APP_TOKEN + '/tables/' + FEISHU_TABLE_ID + '/records',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + FEISHU_TOKEN,
-          'Content-Type': 'application/json; charset=utf-8'
-        },
-        body: JSON.stringify({ fields: fields })
-      }
-    );
+    // 调用 Vercel Serverless Function 中转（凭证由服务端读取，前端不暴露）
+    var response = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, company, phone, email, requirement_type, description })
+    });
 
     var result = await response.json();
 
-    if (response.ok && result.code === 0) {
+    if (response.ok && result.success) {
       // 成功：显示成功弹窗
       document.getElementById('submitModal').style.display = 'flex';
       form.reset();
     } else {
-      // 飞书返回业务错误
-      console.error('飞书接口错误：', result);
-      alert('提交失败，请稍后重试或直接致电 13066169807。\n错误：' + (result.msg || '未知错误'));
+      alert('提交失败，请稍后重试或直接致电 13066169807。\n错误：' + (result.error || '未知错误'));
     }
   } catch (err) {
-    // 网络错误（API 未配置时也会走这里）
     console.error('提交请求失败：', err);
-    if (FEISHU_TOKEN === "请填入你的飞书个人访问令牌") {
-      alert('⚠️ 飞书API尚未配置，请联系管理员填写配置信息。');
-    } else {
-      alert('网络异常，请稍后重试或直接致电 13066169807。');
-    }
+    alert('网络异常，请稍后重试或直接致电 13066169807。');
   } finally {
     btn.textContent = btnText;
     btn.disabled = false;
