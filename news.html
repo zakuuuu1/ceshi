@@ -129,66 +129,11 @@
       <h2 class="cta-headline">关注卓汇<br><span class="gradient-text">了解最新动态</span></h2>
       <p class="cta-sub">订阅卓汇资讯，第一时间获取行业趋势、技术前沿和企业动态</p>
       <div class="cta-actions">
-        <form class="subscribe-form" onsubmit="handleSubscribe(event)" style="display:flex;gap:12px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
-          <input type="email" placeholder="请输入您的企业邮箱" required style="flex:1;min-width:240px;padding:14px 20px;border-radius:9999px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;outline:none;">
-          <button type="submit" class="btn-amber" style="white-space:nowrap;">订阅</button>
-        </form>
-        <div id="subscribeMsg" style="display:none;margin-top:12px;font-size:14px;color:#A5F3FC;"></div>
+        <a href="contact.html" class="btn-amber">咨询材料方案</a>
       </div>
     </div>
   </div>
 </section>
-
-<script>
-/* 订阅表单 — 通过 Vercel Serverless Function 存入 Supabase */
-async function handleSubscribe(e) {
-  e.preventDefault();
-  var form = e.target;
-  var input = form.querySelector('input[type="email"]');
-  var email = input.value.trim();
-  var btn = form.querySelector('button');
-  var btnText = btn.textContent;
-  var msg = document.getElementById('subscribeMsg');
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    msg.style.display = 'block';
-    msg.style.color = '#FCA5A5';
-    msg.textContent = '请输入有效的企业邮箱地址';
-    return;
-  }
-
-  btn.textContent = '提交中…';
-  btn.disabled = true;
-
-  try {
-    var res = await fetch('/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email })
-    });
-    var data = await res.json();
-
-    if (res.ok && data.success) {
-      msg.style.display = 'block';
-      msg.style.color = '#A5F3FC';
-      msg.textContent = '订阅成功！感谢您的关注，我们将定期发送行业资讯到您的邮箱。';
-      form.reset();
-    } else {
-      msg.style.display = 'block';
-      msg.style.color = '#FCA5A5';
-      msg.textContent = '订阅失败，请稍后重试。' + (data.error ? ' (' + data.error + ')' : '');
-    }
-  } catch (err) {
-    msg.style.display = 'block';
-    msg.style.color = '#FCA5A5';
-    msg.textContent = '网络异常，请稍后重试。';
-  } finally {
-    btn.textContent = btnText;
-    btn.disabled = false;
-    setTimeout(function() { msg.style.display = 'none'; }, 8000);
-  }
-}
-</script>
 
 </main>
 
