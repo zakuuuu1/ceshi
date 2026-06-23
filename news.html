@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>新闻动态 — 卓汇 JORWIN</title>
   <meta name="description" content="卓汇最新动态：浙石化华南区核心代理签约、华东仓储中心扩建、Chinaplas 2026参展等企业新闻。">
+  <meta name="keywords" content="新材料新闻,ABS行业动态,SAN市场行情,化工行业资讯,材料技术前沿">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:title" content="新闻中心 — 新材料行业动态">
   <meta property="og:description" content="卓汇最新动态、ABS/SAN 行业资讯、高分子材料技术前沿。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="卓汇 JORWIN">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
 </head>
 <body>
 
@@ -42,6 +39,7 @@
   </div>
 </nav>
 
+<main>
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumb fade-up">
@@ -142,15 +140,57 @@
 </section>
 
 <script>
-function handleSubscribe(e) {
+/* 订阅表单 — 通过 Vercel Serverless Function 存入 Supabase */
+async function handleSubscribe(e) {
   e.preventDefault();
+  var form = e.target;
+  var input = form.querySelector('input[type="email"]');
+  var email = input.value.trim();
+  var btn = form.querySelector('button');
+  var btnText = btn.textContent;
   var msg = document.getElementById('subscribeMsg');
-  msg.style.display = 'block';
-  msg.textContent = '订阅成功！感谢您的关注，我们将定期发送行业资讯到您的邮箱。';
-  e.target.reset();
-  setTimeout(function(){ msg.style.display = 'none'; }, 5000);
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.style.display = 'block';
+    msg.style.color = '#FCA5A5';
+    msg.textContent = '请输入有效的企业邮箱地址';
+    return;
+  }
+
+  btn.textContent = '提交中…';
+  btn.disabled = true;
+
+  try {
+    var res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    });
+    var data = await res.json();
+
+    if (res.ok && data.success) {
+      msg.style.display = 'block';
+      msg.style.color = '#A5F3FC';
+      msg.textContent = '订阅成功！感谢您的关注，我们将定期发送行业资讯到您的邮箱。';
+      form.reset();
+    } else {
+      msg.style.display = 'block';
+      msg.style.color = '#FCA5A5';
+      msg.textContent = '订阅失败，请稍后重试。' + (data.error ? ' (' + data.error + ')' : '');
+    }
+  } catch (err) {
+    msg.style.display = 'block';
+    msg.style.color = '#FCA5A5';
+    msg.textContent = '网络异常，请稍后重试。';
+  } finally {
+    btn.textContent = btnText;
+    btn.disabled = false;
+    setTimeout(function() { msg.style.display = 'none'; }, 8000);
+  }
 }
 </script>
+
+</main>
 
 <footer class="footer">
   <div class="container">

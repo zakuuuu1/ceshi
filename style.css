@@ -465,52 +465,6 @@ ul, ol {
   background: linear-gradient(to top, rgba(14, 11, 31, 0.6) 0%, transparent 60%);
 }
 
-/* 浮动数据卡 */
-.hero-float-card {
-  position: absolute;
-  background: rgba(26, 22, 50, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  border-radius: 16px;
-  padding: 16px 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  animation: float-gentle 6s ease-in-out infinite;
-}
-
-.hero-float-card:nth-child(2) { animation-delay: -3s; }
-
-@keyframes float-gentle {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
-}
-
-.float-card-top {
-  top: -20px;
-  left: -24px;
-}
-
-.float-card-bottom {
-  bottom: -20px;
-  right: -24px;
-  animation-delay: -2s !important;
-}
-
-.float-card-num {
-  font-family: var(--font-head);
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--purple-light);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.float-card-label {
-  font-size: 12px;
-  color: rgba(196, 181, 253, 0.7);
-  white-space: nowrap;
-}
-
 /* KPI 条 */
 .hero-kpi {
   position: relative;

@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>隐私保护声明 — 卓汇 JORWIN</title>
   <meta name="description" content="卓汇隐私保护声明：我们如何收集、使用和保护您的个人信息。">
+  <meta name="keywords" content="隐私保护,数据安全,个人信息保护,合规声明">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:title" content="隐私声明 — 卓汇 JORWIN">
   <meta property="og:description" content="卓汇鑫盛隐私声明。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="卓汇 JORWIN">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
 </head>
 <body>
 
@@ -42,6 +39,7 @@
   </div>
 </nav>
 
+<main>
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumb fade-up">
@@ -77,7 +75,8 @@
 
       <h2>三、信息存储与安全</h2>
       <ul>
-        <li>您的个人信息存储于安全可控的服务器环境中</li>
+        <li>您通过联系表单提交的数据通过 Vercel Serverless Function 安全传输至 Supabase 云数据库进行存储</li>
+        <li>Supabase 采用行业标准加密和访问控制机制，保障数据在传输和存储过程中的安全性</li>
         <li>我们采用合理的加密、访问控制和物理安全措施保护您的数据</li>
         <li>信息保留期限不超过实现收集目的所需的时间，或法律法规要求的期限</li>
       </ul>
@@ -118,6 +117,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="footer">
   <div class="container">
@@ -169,7 +170,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copyright">&copy; 2026 卓汇鑫盛（广东）电子科技有限公司 &middot; JorwinXinsheng (Guangdong) Electronics Technology Co., Ltd.</div>
+      <div class="footer-copyright">&copy; <span id="copyright-year"></span> 卓汇鑫盛（广东）电子科技有限公司 &middot; JorwinXinsheng (Guangdong) Electronics Technology Co., Ltd.</div>
       <div class="footer-legal">
         <a href="privacy.html" class="footer-legal-item">隐私保护声明</a><a href="terms.html" class="footer-legal-item">服务条款</a>
       </div>
@@ -178,5 +179,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script>document.getElementById("copyright-year")&&(document.getElementById("copyright-year").textContent=new Date().getFullYear())</script>
 </body>
 </html>

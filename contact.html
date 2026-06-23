@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>联系我们 — 卓汇 JORWIN</title>
   <meta name="description" content="联系卓汇JORWIN：业务热线、商务邮箱、公司地址。专属顾问一对一对接，为您提供高分子新材料解决方案。">
+  <meta name="keywords" content="联系卓汇,材料报价,ABS树脂报价,SAN树脂采购,材料方案咨询">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:title" content="联系我们 — 卓汇 JORWIN">
   <meta property="og:description" content="获取 ABS/SAN 新材料报价、技术支持与定制化解决方案。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="卓汇 JORWIN">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
 </head>
 <body>
 
@@ -42,6 +39,7 @@
   </div>
 </nav>
 
+<main>
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumb fade-up">
@@ -62,25 +60,25 @@
         <form id="contactForm" onsubmit="handleContactSubmit(event)">
           <div class="form-group">
             <label>您的姓名 *</label>
-            <input type="text" placeholder="请输入您的姓名" required>
+            <input type="text" name="name" placeholder="请输入您的姓名" required>
           </div>
           <div class="form-group">
             <label>公司名称 *</label>
-            <input type="text" placeholder="请输入您的公司名称" required>
+            <input type="text" name="company" placeholder="请输入您的公司名称" required>
           </div>
           <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div>
               <label>联系电话 *</label>
-              <input type="tel" placeholder="手机号" required>
+              <input type="tel" name="phone" placeholder="手机号或座机" required>
             </div>
             <div>
               <label>电子邮箱</label>
-              <input type="email" placeholder="you@company.com">
+              <input type="email" name="email" placeholder="you@company.com">
             </div>
           </div>
           <div class="form-group">
             <label>需求类型</label>
-            <select>
+            <select name="requirement_type">
               <option>ABS 树脂原料采购</option>
               <option>SAN 树脂原料采购</option>
               <option>新材料解决方案咨询</option>
@@ -90,7 +88,7 @@
           </div>
           <div class="form-group">
             <label>需求描述</label>
-            <textarea placeholder="请简要描述您的材料需求、数量、应用场景等信息，以便我们为您提供精准的方案建议…" rows="4"></textarea>
+            <textarea name="description" placeholder="请简要描述您的材料需求、数量、应用场景等信息，以便我们为您提供精准的方案建议…" rows="4"></textarea>
           </div>
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">发送咨询请求 →</button>
         </form>
@@ -146,6 +144,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="footer">
   <div class="container">
@@ -219,54 +219,80 @@
   </div>
 </div>
 
+<!-- 提交错误弹窗 -->
+<div id="errorModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:#1E1B4B;border:1px solid rgba(239,68,68,0.4);border-radius:24px;padding:40px 36px;max-width:460px;width:90%;text-align:center;position:relative;">
+    <div style="width:56px;height:56px;border-radius:50%;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">提交失败</h3>
+    <p id="errorMsg" style="font-size:14px;color:rgba(196,181,253,0.75);line-height:1.7;margin-bottom:24px;">请稍后重试或直接致电 13066169807</p>
+    <button onclick="document.getElementById('errorModal').style.display='none'" style="background:linear-gradient(135deg,#7C3AED,#6366F1);color:#fff;border:none;border-radius:9999px;padding:12px 36px;font-size:15px;font-weight:700;cursor:pointer;">关闭</button>
+  </div>
+</div>
+
 <script>
 /* ============================================================
  * Supabase 后端接入（通过 Vercel Serverless Function 中转）
  * 凭证配置：Vercel 控制台 → Settings → Environment Variables
- *   SUPABASE_URL      = https://xxxxxxxxxxxx.supabase.co
- *   SUPABASE_ANON_KEY = eyJhbGciOi...（anon public key）
- * 无需在此文件填写任何 key，前端代码完全干净安全。
+ * 前端代码完全干净安全，无需填写任何 key。
  * ============================================================ */
+
+function showError(msg) {
+  document.getElementById('errorMsg').textContent = msg;
+  document.getElementById('errorModal').style.display = 'flex';
+}
+
+// 国际电话号码验证：支持 +86 13812345678、020-12345678 等格式
+function isValidPhone(phone) {
+  // 至少 7 个数字，允许 + - 空格和括号
+  var digits = phone.replace(/[^\d]/g, '');
+  if (digits.length < 7) return false;
+  // 纯数字或以 + 开头的国际格式
+  return /^[\d\s\-\+\(\)]{7,20}$/.test(phone);
+}
 
 async function handleContactSubmit(e) {
   e.preventDefault();
-
-  // 读取表单数据
   var form = e.target;
-  var inputs = form.querySelectorAll('input, select, textarea');
-  var name             = inputs[0].value.trim();
-  var company          = inputs[1].value.trim();
-  var phone            = inputs[2].value.trim();
-  var email            = inputs[3].value.trim();
-  var requirement_type = inputs[4].value;
-  var description      = inputs[5].value.trim();
 
-  // 提交按钮加载状态
+  // 按 name 属性取值（稳健，不依赖 DOM 顺序）
+  var name    = (form.querySelector('[name="name"]')||{}).value.trim();
+  var company = (form.querySelector('[name="company"]')||{}).value.trim();
+  var phone   = (form.querySelector('[name="phone"]')||{}).value.trim();
+  var email   = (form.querySelector('[name="email"]')||{}).value.trim();
+  var requirement_type = (form.querySelector('[name="requirement_type"]')||{}).value;
+  var description = (form.querySelector('[name="description"]')||{}).value.trim();
+
+  // 客户端验证
+  if (!name)    { showError('请填写您的姓名'); return; }
+  if (!company) { showError('请填写公司名称'); return; }
+  if (!phone)   { showError('请填写联系电话'); return; }
+  if (!isValidPhone(phone)) { showError('电话号码格式不正确，请填写有效的手机号或座机号（支持国际格式，如 +86 13812345678）'); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('邮箱格式不正确，请填写有效的电子邮箱地址'); return; }
+
   var btn = form.querySelector('button[type="submit"]');
   var btnText = btn.textContent;
   btn.textContent = '提交中…';
   btn.disabled = true;
 
   try {
-    // 调用 Vercel Serverless Function 中转（凭证由服务端读取，前端不暴露）
     var response = await fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, company, phone, email, requirement_type, description })
+      body: JSON.stringify({ name:name, company:company, phone:phone, email:email, requirement_type:requirement_type, description:description })
     });
-
     var result = await response.json();
 
     if (response.ok && result.success) {
-      // 成功：显示成功弹窗
       document.getElementById('submitModal').style.display = 'flex';
       form.reset();
     } else {
-      alert('提交失败，请稍后重试或直接致电 13066169807。\n错误：' + (result.error || '未知错误'));
+      showError('提交失败，请稍后重试或直接致电 13066169807。' + (result.error ? '\n错误：' + result.error : ''));
     }
   } catch (err) {
     console.error('提交请求失败：', err);
-    alert('网络异常，请稍后重试或直接致电 13066169807。');
+    showError('网络异常，请稍后重试或直接致电 13066169807。');
   } finally {
     btn.textContent = btnText;
     btn.disabled = false;

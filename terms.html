@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>服务条款 — 卓汇 JORWIN</title>
   <meta name="description" content="卓汇网站服务条款：使用本网站即表示您同意以下条款和条件。">
+  <meta name="keywords" content="服务条款,使用协议,法律声明">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:title" content="服务条款 — 卓汇 JORWIN">
   <meta property="og:description" content="卓汇鑫盛服务条款。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="卓汇 JORWIN">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://ceshi-vert.vercel.app/assets/og-image.png">
 </head>
 <body>
 
@@ -42,6 +39,7 @@
   </div>
 </nav>
 
+<main>
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumb fade-up">
@@ -124,6 +122,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
@@ -174,7 +174,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copyright">&copy; 2026 卓汇鑫盛（广东）电子科技有限公司 &middot; JorwinXinsheng (Guangdong) Electronics Technology Co., Ltd.</div>
+      <div class="footer-copyright">&copy; <span id="copyright-year"></span> 卓汇鑫盛（广东）电子科技有限公司 &middot; JorwinXinsheng (Guangdong) Electronics Technology Co., Ltd.</div>
       <div class="footer-legal">
         <a href="privacy.html" class="footer-legal-item">隐私保护声明</a><a href="terms.html" class="footer-legal-item">服务条款</a>
       </div>
@@ -183,5 +183,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script>document.getElementById("copyright-year")&&(document.getElementById("copyright-year").textContent=new Date().getFullYear())</script>
 </body>
 </html>

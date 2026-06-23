@@ -170,30 +170,8 @@
 
 
 /* ══════════════════════════════════════
-   5. Logo 墙无缝滚动
+   5. Logo 墙无缝滚动（CSS animation 驱动）
 ══════════════════════════════════════ */
-(function () {
-  var track = document.getElementById('logoTrack');
-  if (!track) return;
-  // CSS animation handles it
-})();
 
 
-/* ══════════════════════════════════════
-   6. 浮动卡片视差
-══════════════════════════════════════ */
-(function () {
-  var hero = document.querySelector('.hero-content');
-  if (!hero) return;
 
-  document.addEventListener('mousemove', function (e) {
-    var dx = (e.clientX / window.innerWidth - 0.5) * 2;
-    var dy = (e.clientY / window.innerHeight - 0.5) * 2;
-
-    var cards = document.querySelectorAll('.hero-float-card');
-    cards.forEach(function (card, i) {
-      var factor = i === 0 ? 8 : -6;
-      card.style.transform = 'translate(' + (dx * factor) + 'px, ' + (dy * factor) + 'px)';
-    });
-  });
-})();
